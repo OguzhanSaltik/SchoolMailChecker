@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -14,6 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 @ManagedBean
+@RequestScoped
 public class MailSender {
 	private String content;
 	private String receiver;
@@ -61,7 +63,7 @@ public class MailSender {
 
 			System.out.println("Done");
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("http://localhost:8080/mailChecker/faces/myResponse.xhtml");
+					.redirect("http://localhost:8080/jboss-javaee-webapp/faces/check.xhtml");
 
 		} catch (MessagingException | IOException e) {
 			throw new RuntimeException(e);

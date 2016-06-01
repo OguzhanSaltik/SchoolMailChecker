@@ -1,13 +1,12 @@
 package mail;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -17,36 +16,40 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 
-import com.google.gson.Gson;
-
-import model.Mail;
-
-//import model.Mail;
-
-@ManagedBean(name="checking", eager = true)
-public class CheckingMails{
+@ManagedBean(name = "groups", eager = true)
+@SessionScoped
+public class CheckingGroups {
 	private String host = "pop.gmail.com";// change accordingly
 	// private static String mailStoreType = "pop3";
 	private String username = "bilmuh.syt@gmail.com";// change accordingly
 	private String password = "1234ZXCV";// change accordingly
 
-	private Map<Integer, Mail> mails = new HashMap<Integer, Mail>();
-	
-	public String messageList;
-	
-	private String totalMessage;
+	public ArrayList<Student> students = new ArrayList<>();
 
-	public String getMessagesAsJson() {
-		String json = new Gson().toJson(mails);
-		System.out.println(json);
-		return json;
+	public String deneme = "hataaaali";
+
+	public String getDeneme() {
+		return deneme;
+	}
+
+	public void setDeneme(String deneme) {
+		this.deneme = deneme;
+	}
+
+	public ArrayList<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(ArrayList<Student> students) {
+		this.students = students;
 	}
 
 	public void check() {
 		try {
 			checkMails();
+			System.out.println("Students printing: " + students.toString());
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("http://localhost:8080/mailChecker/faces/showMails.xhtml");
+					.redirect("http://localhost:8080/jboss-javaee-webapp/faces/showGroups.xhtml");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,21 +83,36 @@ public class CheckingMails{
 
 			Message[] messages = emailFolder.getMessages();
 			System.out.println("messages.length---" + messages.length);
-			 
-			totalMessage =String.valueOf(messages.length);
+
 			for (int i = 0, n = messages.length; i < n; i++) {
 				Message message = messages[i];
+				String mailContent = message.getContent().toString().substring(0,
+						message.getContent().toString().length() - 2).toString().replace("\\n", "\n");
+				System.out.println("!!!!!!!!!!Mail Content: " + mailContent);
+//				String s = "Merhaba Hocam,\n SYT dersinin 2.proje grup uyeleri asagidaki gibidir:\n  5110000000-Samet Ozguney\n 5110000001-Maulana Sapta\n 5110000002-Oguzhan Saltik\n";
 
-				Mail mail = new Mail();
+				Pattern p = Pattern.compile("((\\d+)(-)(.*)((\r\n)|(\n)))", Pattern.UNICODE_CHARACTER_CLASS);
 
-				mail.setSubject(message.getSubject());
-				mail.setFrom(message.getFrom()[0].toString());
-				mail.setText(message.getContent().toString());
+				Matcher m = p.matcher(mailContent.toString());
 
-				long time = message.getSentDate().getTime();
-				mail.setSentDate(time);
+				//System.out.println("M.Find: " + m.find());
+				while (m.find()) {
+//					System.out.println("Found1: " + m.group(1));
+//					System.out.println("Found2: " + m.group(2));
+//					System.out.println("Found3: " + m.group(3));
+//					System.out.println("Found4: " + m.group(4));
+//					
+//					System.out.println("Found1: " + m.group(1));
+//					System.out.println("Found2: " + m.group(2));
+//					System.out.println("Found3: " + m.group(3));
+//					System.out.println("Found4: " + m.group(4));
+//					
+					 Student s = new Student(m.group(2),m.group(4), i);
+					System.out.println("Found All: " + m.group());
+					 students.add(s);
+					System.out.println("-----------------------Student Added-------------------------");
 
-				mails.put(i + 1, mail);
+				}
 
 				System.out.println("---------------------------------");
 				System.out.println("Email Number " + (i + 1));
@@ -106,7 +124,7 @@ public class CheckingMails{
 			// close the store and folder objects
 			emailFolder.close(false);
 			store.close();
-			messageList = getMessagesAsJson();
+
 			System.out.println("-------------------------------Done Checking MailBox---------------------------------");
 
 		} catch (NoSuchProviderException e) {
