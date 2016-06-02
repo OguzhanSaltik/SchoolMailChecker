@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<title>Default title</title>
+	<title>Login Page</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -59,24 +59,24 @@
 
 		<!-- Main component for a primary marketing message or call to action -->
 		<div class="jumbotron">
-			<h1>Mail Gönderimi:</h1>
+			<h1>Giriş Yapınız</h1>
 			<p>
 				<h:form>
 					<p>
-						<span class="label label-info">Content :</span>
+						<span class="label label-info">Username:</span>
 					</p>
-					<h:inputText class="form-control" id="name"
-						value="#{mailSender.content}" />
+					<h:inputText class="form-control" id="username"
+						value="#{login.username}" />
 					<br />
 					<br />
 					<p>
-						<span class="label label-info">To :</span>
+						<span class="label label-info">Password :</span>
 					</p>
 					<h:inputText class="form-control" id="receiver"
-						value="#{mailSender.receiver}" />
+						value="#{login.password}" />
 					<br />
-					<h:commandButton class="btn btn-primary btn-lg" value="Submit"
-						action="#{mailSender.send}" />
+					<h:commandButton class="btn btn-primary btn-lg" value="Giris"
+						action="#{login.send}" />
 				</h:form>
 			</p>
 		</div>

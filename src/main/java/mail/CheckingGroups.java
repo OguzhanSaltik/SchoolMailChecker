@@ -21,20 +21,10 @@ import javax.mail.Store;
 public class CheckingGroups {
 	private String host = "pop.gmail.com";// change accordingly
 	// private static String mailStoreType = "pop3";
-	private String username = "bilmuh.syt@gmail.com";// change accordingly
-	private String password = "1234ZXCV";// change accordingly
+	private String username = "mail@gmail.com";// change accordingly
+	private String password = "password";// change accordingly
 
 	public ArrayList<Student> students = new ArrayList<>();
-
-	public String deneme = "hataaaali";
-
-	public String getDeneme() {
-		return deneme;
-	}
-
-	public void setDeneme(String deneme) {
-		this.deneme = deneme;
-	}
 
 	public ArrayList<Student> getStudents() {
 		return students;

@@ -3,6 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
+
 <h:head>
 	<title>Default title</title>
 	<!-- Latest compiled and minified CSS -->
@@ -39,18 +40,31 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-					<a class="navbar-brand" href="#">Student Group Checker</a>
+				<a class="navbar-brand" href="#">Mail4J</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="http://localhost:8080/jboss-javaee-webapp/faces/mail.xhtml">Mail</a></li>
-					<li><a href="http://localhost:8080/jboss-javaee-webapp/faces/check.xhtml">Check</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Dropdown <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Nav header</li>
+							<li><a href="#">Separated link</a></li>
+							<li><a href="#">One more separated link</a></li>
+						</ul></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					
-					<li><a href="http://localhost:8080/jboss-javaee-webapp/faces/login.xhtml">Login</a></li>
-					<li><a href="http://localhost:8080/jboss-javaee-webapp/faces/login.xhtml">Logout</a></li>
+					<li class="active"><a href="./">Default <span
+							class="sr-only">(current)</span></a></li>
+					<li><a href="../navbar-static-top/">Static top</a></li>
+					<li><a href="../navbar-fixed-top/">Fixed top</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -59,29 +73,19 @@
 
 		<!-- Main component for a primary marketing message or call to action -->
 		<div class="jumbotron">
-			<h1>Mail Gönderimi:</h1>
+			<h1>Mail Sender :</h1>
 			<p>
-				<h:form>
-					<p>
-						<span class="label label-info">Content :</span>
-					</p>
-					<h:inputText class="form-control" id="name"
-						value="#{mailSender.content}" />
-					<br />
-					<br />
-					<p>
-						<span class="label label-info">To :</span>
-					</p>
-					<h:inputText class="form-control" id="receiver"
-						value="#{mailSender.receiver}" />
-					<br />
-					<h:commandButton class="btn btn-primary btn-lg" value="Submit"
-						action="#{mailSender.send}" />
-				</h:form>
+				<div class="alert alert-danger" role="alert">
+				<p>Username and password incorrect</p>
+				</div>
 			</p>
 		</div>
+
 	</div>
 	<!-- /container -->
+
+
+
 </h:body>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -1,22 +1,9 @@
 package mail;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Serializable;
-import java.io.Writer;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.Folder;
@@ -31,15 +18,13 @@ import com.google.gson.Gson;
 
 import model.Mail;
 
-//import model.Mail;
-
 @ManagedBean(name = "checking", eager = true)
 @SessionScoped
 public class CheckingMails {
 	private String host = "pop.gmail.com";// change accordingly
 	// private static String mailStoreType = "pop3";
-	private String username = "bilmuh.syt@gmail.com";// change accordingly
-	private String password = "1234ZXCV";// change accordingly
+	private String username = "mail@gmail.com";// change accordingly
+	private String password = "password";// change accordingly
 
 	public ArrayList<Mail> mails = new ArrayList<>();
 
@@ -106,8 +91,9 @@ public class CheckingMails {
 
 				mail.setSubject(message.getSubject());
 				mail.setFrom(message.getFrom()[0].toString());
-				String mailContent = message.getContent().toString().substring(0, message.getContent().toString().length()-2);
-			
+				String mailContent = message.getContent().toString().substring(0,
+						message.getContent().toString().length() - 2);
+
 				mail.setText(mailContent);
 
 				long time = message.getSentDate().getTime();

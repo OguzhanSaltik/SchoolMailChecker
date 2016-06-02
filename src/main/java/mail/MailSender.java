@@ -47,14 +47,14 @@ public class MailSender {
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("bilmuh.syt@gmail.com", "1234ZXCV");
+				return new PasswordAuthentication("mail@gmail.com", "password");
 			}
 		});
 
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("bilmuh.syt@gmail.com"));
+			message.setFrom(new InternetAddress("mail@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiver));
 			message.setSubject("Testing Subject");
 			message.setText(content);
